@@ -163,7 +163,6 @@ cloudfunctions/              # 云函数目录
 如有问题或建议，欢迎通过以下方式联系：
 
 - 提交 [Issue](https://github.com/mryifu/petlife-miniprogram/issues)
-- 发送邮件至: mryifu@example.com
 
 ---
 
@@ -274,7 +273,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For questions or suggestions:
 
 - Submit an [Issue](https://github.com/your-username/petlife-miniprogram/issues)
-- Email: your-email@example.com
 
 ---
 

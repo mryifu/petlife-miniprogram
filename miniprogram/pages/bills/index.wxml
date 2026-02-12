@@ -1,0 +1,167 @@
+<!-- pages/bills/index.wxml -->
+<view class="container">
+  <!-- 宠物信息卡片 -->
+  <view class="pet-header-card" wx:if="{{pet}}">
+    <image class="pet-avatar-mini" src="{{pet.avatar}}" mode="aspectFill"></image>
+    <view class="pet-info-mini">
+      <text class="pet-name-mini">{{pet.name}}</text>
+      <text class="pet-species-mini">{{pet.species}}</text>
+    </view>
+  </view>
+
+  <!-- 汇总卡片 -->
+  <view class="summary-card">
+    <view class="summary-header">
+      <text class="summary-title">总消费</text>
+      <view class="add-btn-fab" bindtap="showAddBillSheet">
+        <text class="fab-icon-small">+</text>
+      </view>
+    </view>
+    <view class="summary-amount">
+      <text class="currency">¥</text>
+      <text class="amount-value">{{totalAmount}}</text>
+    </view>
+    <view class="summary-label">{{timeFilter === 'today' ? '今天' : timeFilter === 'week' ? '本周' : timeFilter === 'month' ? '本月' : timeFilter === 'year' ? '今年' : '全部'}}的消费</view>
+  </view>
+
+  <!-- 时间筛选 -->
+  <scroll-view class="time-filters" scroll-x>
+    <view class="filter-tabs">
+      <view class="filter-tab {{timeFilter === 'today' ? 'active' : ''}}" bindtap="onTimeFilterChange" data-filter="today">
+        <text>今天</text>
+      </view>
+      <view class="filter-tab {{timeFilter === 'week' ? 'active' : ''}}" bindtap="onTimeFilterChange" data-filter="week">
+        <text>本周</text>
+      </view>
+      <view class="filter-tab {{timeFilter === 'month' ? 'active' : ''}}" bindtap="onTimeFilterChange" data-filter="month">
+        <text>本月</text>
+      </view>
+      <view class="filter-tab {{timeFilter === 'year' ? 'active' : ''}}" bindtap="onTimeFilterChange" data-filter="year">
+        <text>今年</text>
+      </view>
+      <view class="filter-tab {{timeFilter === 'all' ? 'active' : ''}}" bindtap="onTimeFilterChange" data-filter="all">
+        <text>全部</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 分类统计 -->
+  <view class="category-stats" wx:if="{{categoryStats.length > 0}}">
+    <view class="stats-title">分类统计</view>
+    <view class="stats-list">
+      <block wx:for="{{categoryStats}}" wx:key="id">
+        <view class="stat-item" bindtap="onCategoryFilterChange" data-id="{{item.id}}">
+          <view class="stat-icon" style="background: {{item.color}}20;">
+            <text style="color: {{item.color}};">{{item.emoji}}</text>
+          </view>
+          <view class="stat-info">
+            <text class="stat-name">{{item.name}}</text>
+            <text class="stat-percent">{{item.percent}}%</text>
+          </view>
+          <text class="stat-amount">¥{{item.amountStr}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="category-filters" scroll-x>
+    <view class="filter-tabs">
+      <view class="filter-tab {{categoryFilter === 'all' ? 'active' : ''}}" bindtap="onCategoryFilterChange" data-id="all">
+        <text>全部</text>
+      </view>
+      <block wx:for="{{categories}}" wx:key="id">
+        <view class="filter-tab {{categoryFilter === item.id ? 'active' : ''}}" bindtap="onCategoryFilterChange" data-id="{{item.id}}" style="border-color: {{item.color}}; color: {{categoryFilter === item.id ? item.color : '#8D7B68'}};">
+          <text class="tab-emoji">{{item.emoji}}</text>
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 消费记录列表 -->
+  <view class="records-section">
+    <view class="section-header">
+      <text class="section-title">消费明细</text>
+      <text class="section-count">共{{filteredBills.length}}条</text>
+    </view>
+
+    <view class="empty-state" wx:if="{{filteredBills.length === 0}}">
+      <text class="empty-icon">💰</text>
+      <text class="empty-text">还没有消费记录</text>
+      <text class="empty-hint">点击右上角添加第一条记录吧</text>
+    </view>
+
+    <view class="records-list" wx:else>
+      <block wx:for="{{filteredBills}}" wx:key="_id">
+        <view class="bill-item" bindlongpress="deleteBill" data-id="{{item._id}}">
+          <view class="bill-icon" style="background: {{item.categoryInfo.color}}20;">
+            <text style="color: {{item.categoryInfo.color}};">
+              {{item.categoryInfo.emoji}}
+            </text>
+          </view>
+          <view class="bill-content">
+            <view class="bill-header">
+              <text class="bill-category">{{item.categoryInfo.name}}</text>
+              <text class="bill-sub" wx:if="{{item.subCategory}}">· {{item.subCategory}}</text>
+            </view>
+            <text class="bill-date">{{item.date}}</text>
+            <text class="bill-note" wx:if="{{item.note}}">{{item.note}}</text>
+          </view>
+          <view class="bill-amount">
+            <text class="amount-symbol">¥</text>
+            <text class="amount-number">{{item.amountStr}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!-- 添加消费弹窗 -->
+<view class="modal {{showAddSheet ? 'show' : ''}}" bindtap="closeAddSheet">
+  <view class="modal-content bill-modal" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">添加消费记录</text>
+      <text class="modal-close" bindtap="closeAddSheet">✕</text>
+    </view>
+
+    <view class="modal-body">
+      <view class="form-group">
+        <text class="label">金额 (元)</text>
+        <input class="input large-input" type="digit" placeholder="0.00" value="{{newBill.amount}}" bindinput="onAmountInput" />
+      </view>
+
+      <view class="form-group">
+        <text class="label">分类</text>
+        <picker mode="selector" range="{{categories}}" range-key="name" value="{{categoryIndex}}" bindchange="onCategoryChange">
+          <view class="picker">
+            <text class="picker-emoji">{{categories[categoryIndex].emoji}}</text>
+            <text>{{categories[categoryIndex].name}}</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <text class="label">子分类</text>
+        <input class="input" placeholder="例如：主粮、零食等" value="{{newBill.subCategory}}" bindinput="onSubCategoryChange" />
+      </view>
+
+      <view class="form-group">
+        <text class="label">日期</text>
+        <picker mode="date" value="{{newBill.date}}" bindchange="onDateChange">
+          <view class="picker">{{newBill.date}}</view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <text class="label">备注</text>
+        <textarea class="textarea" placeholder="记录一些细节..." value="{{newBill.note}}" bindinput="onNoteInput" maxlength="100"></textarea>
+      </view>
+    </view>
+
+    <view class="modal-footer">
+      <button class="btn-primary" bindtap="saveBill">保存记录</button>
+    </view>
+  </view>
+</view>

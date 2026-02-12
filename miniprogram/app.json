@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/pets/index",
+    "pages/pets/form",
+    "pages/pets/members",
+    "pages/pets/invite",
+    "pages/pets/join",
+    "pages/knowledge/index",
+    "pages/knowledge/detail",
+    "pages/charts/index",
+    "pages/profile/index",
+    "pages/album/index",
+    "pages/album/detail",
+    "pages/items/index",
+    "pages/items/form",
+    "pages/weight/index",
+    "pages/bills/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFF8F0",
+    "navigationBarTitleText": "爪爪手账",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#BCAAA4",
+    "selectedColor": "#A67C52",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "日常",
+        "iconPath": "images/tabbar/home.png",
+        "selectedIconPath": "images/tabbar/home.png"
+      },
+      {
+        "pagePath": "pages/pets/index",
+        "text": "毛孩子",
+        "iconPath": "images/tabbar/pet.png",
+        "selectedIconPath": "images/tabbar/pet.png"
+      },
+      {
+        "pagePath": "pages/album/index",
+        "text": "相册",
+        "iconPath": "images/tabbar/community.png",
+        "selectedIconPath": "images/tabbar/community.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/tabbar/user.png",
+        "selectedIconPath": "images/tabbar/user.png"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于查找附近的宠物医院和宠物店"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseLocation",
+    "getFuzzyLocation"
+  ]
+}

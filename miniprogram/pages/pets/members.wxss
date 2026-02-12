@@ -1,0 +1,136 @@
+/* pages/pets/members.wxss */
+.container {
+  padding: 32rpx;
+  background: #FFFBF0;
+  min-height: 100vh;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #C59D5F;
+}
+
+.member-list {
+  margin-bottom: 48rpx;
+}
+
+.member-card {
+  background: white;
+  border-radius: 32rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4rpx 16rpx rgba(92, 64, 51, 0.08);
+}
+
+.member-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.member-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C59D5F 0%, #D4AF6A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.avatar-icon {
+  font-size: 48rpx;
+}
+
+.member-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-id {
+  font-size: 28rpx;
+  color: #5C4033;
+  margin-bottom: 8rpx;
+  word-break: break-all;
+}
+
+.member-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.member-badges {
+  display: flex;
+  gap: 12rpx;
+  margin-right: 16rpx;
+}
+
+.badge {
+  padding: 8rpx 16rpx;
+  border-radius: 16rpx;
+  font-size: 22rpx;
+}
+
+.badge.creator {
+  background: #FFE5CC;
+  color: #C59D5F;
+}
+
+.badge.me {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+.member-actions {
+  flex-shrink: 0;
+}
+
+.btn-remove {
+  background: #FFE5E5;
+  color: #F44336;
+  border: none;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.btn-primary, .btn-secondary {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 32rpx;
+  font-size: 32rpx;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #C59D5F 0%, #D4AF6A 100%);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  color: #C59D5F;
+  border: 2rpx solid #C59D5F;
+}

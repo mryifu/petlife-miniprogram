@@ -1,0 +1,144 @@
+/* pages/pets/invite.wxss */
+.container {
+  padding: 32rpx;
+  background: #FFFBF0;
+  min-height: 100vh;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #C59D5F;
+}
+
+.invite-card {
+  background: white;
+  border-radius: 32rpx;
+  padding: 48rpx;
+  margin-bottom: 48rpx;
+  box-shadow: 0 8rpx 24rpx rgba(92, 64, 51, 0.12);
+}
+
+.code-display {
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.code-label {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.code-value {
+  display: block;
+  font-size: 72rpx;
+  font-weight: bold;
+  color: #C59D5F;
+  letter-spacing: 8rpx;
+  font-family: 'Courier New', monospace;
+}
+
+.expire-info {
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.expire-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.btn-copy {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #C59D5F 0%, #D4AF6A 100%);
+  color: white;
+  border-radius: 32rpx;
+  font-size: 32rpx;
+  border: none;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.usage-hint {
+  background: #FFF9E6;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.hint-title {
+  display: block;
+  font-size: 28rpx;
+  color: #5C4033;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.hint-text {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 120rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.btn-primary, .btn-secondary {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 32rpx;
+  font-size: 32rpx;
+  border: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #C59D5F 0%, #D4AF6A 100%);
+  color: white;
+}
+
+.btn-secondary {
+  background: white;
+  color: #C59D5F;
+  border: 2rpx solid #C59D5F;
+}
+
+.btn-link {
+  text-align: center;
+  color: #C59D5F;
+  font-size: 28rpx;
+  padding: 24rpx 0;
+  text-decoration: underline;
+}

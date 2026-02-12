@@ -1,0 +1,45 @@
+<!-- pages/pets/invite.wxml -->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">邀请共养</text>
+    <text class="page-subtitle">分享邀请码给好友</text>
+  </view>
+
+  <view class="invite-card" wx:if="{{code}}">
+    <view class="code-display">
+      <text class="code-label">邀请码</text>
+      <text class="code-value">{{code}}</text>
+    </view>
+
+    <view class="expire-info">
+      <text class="expire-text">有效期至：{{expireTime}}</text>
+    </view>
+
+    <button class="btn-copy" bindtap="copyCode">
+      复制邀请码
+    </button>
+
+    <view class="usage-hint">
+      <text class="hint-title">使用方法：</text>
+      <text class="hint-text">1. 复制邀请码</text>
+      <text class="hint-text">2. 分享给好友</text>
+      <text class="hint-text">3. 好友在"加入共养"页面输入邀请码</text>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:else>
+    <text class="empty-text">{{loading ? '生成中...' : '点击按钮生成邀请码'}}</text>
+  </view>
+
+  <view class="action-buttons">
+    <button class="btn-primary" bindtap="generateCode" wx:if="{{!code}}">
+      生成邀请码
+    </button>
+    <button class="btn-secondary" bindtap="regenerateCode" wx:else>
+      重新生成
+    </button>
+    <navigator url="/pages/pets/join" class="btn-link">
+      我要加入共养
+    </navigator>
+  </view>
+</view>

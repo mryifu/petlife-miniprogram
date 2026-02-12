@@ -1,0 +1,64 @@
+# 配置说明 / Configuration Guide
+
+## 中文说明
+
+本文件是 `project.private.config.json` 的示例模板。请复制此文件并重命名为 `project.private.config.json`，然后填入你的实际配置信息。
+
+### 配置步骤
+
+1. 复制此文件：
+   ```bash
+   cp project.private.config.example.json project.private.config.json
+   ```
+
+2. 在 `project.private.config.json` 中填入你的配置信息
+
+3. 确保 `project.private.config.json` 已被添加到 `.gitignore` 中（已默认配置）
+
+### 配置项说明
+
+```json
+{
+  "libVersion": "3.14.1",
+  "projectname": "爪爪手账",
+  "condition": {},
+  "setting": {
+    "urlCheck": true,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "useApiHook": true,
+    "showShadowRootInWxmlPanel": true,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "compileHotReLoad": true,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false
+  }
+}
+```
+
+---
+
+## English
+
+This file is an example template for `project.private.config.json`. Please copy this file and rename it to `project.private.config.json`, then fill in your actual configuration.
+
+### Configuration Steps
+
+1. Copy this file:
+   ```bash
+   cp project.private.config.example.json project.private.config.json
+   ```
+
+2. Fill in your configuration in `project.private.config.json`
+
+3. Ensure `project.private.config.json` is added to `.gitignore` (already configured by default)
+
+### Configuration Options
+
+See the JSON structure above for available settings.

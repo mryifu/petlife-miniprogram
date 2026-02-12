@@ -1,0 +1,38 @@
+<!-- pages/album/detail.wxml -->
+<view class="container" wx:if="{{album}}">
+  <!-- Image Viewer -->
+  <view class="image-viewer" bindtap="previewImage">
+    <image class="full-image" src="{{album.image}}" mode="aspectFit"></image>
+  </view>
+
+  <!-- Navigation Arrows -->
+  <view class="nav-arrows">
+    <view class="nav-btn prev {{currentIndex === 0 ? 'disabled' : ''}}" bindtap="prevPhoto">
+      <text>‹</text>
+    </view>
+    <view class="nav-btn next {{currentIndex === allAlbums.length - 1 ? 'disabled' : ''}}" bindtap="nextPhoto">
+      <text>›</text>
+    </view>
+  </view>
+
+  <!-- Photo Info -->
+  <view class="photo-info-panel">
+    <view class="info-row">
+      <text class="info-label">日期</text>
+      <text class="info-value">{{album.date}} {{album.time}}</text>
+    </view>
+    <view class="info-row" wx:if="{{album.description}}">
+      <text class="info-label">描述</text>
+      <text class="info-value">{{album.description}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">位置</text>
+      <text class="info-value">{{currentIndex + 1}} / {{allAlbums.length}}</text>
+    </view>
+  </view>
+
+  <!-- Action Buttons -->
+  <view class="action-buttons">
+    <button class="btn-delete" bindtap="deletePhoto">删除照片</button>
+  </view>
+</view>

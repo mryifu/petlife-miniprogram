@@ -1,0 +1,126 @@
+<!-- pages/profile/index.wxml -->
+<view class="container">
+  <!-- User Info -->
+  <view class="card user-card flex-row" bindtap="editUserInfo">
+    <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/default_avatar.png'}}" mode="aspectFill"></image>
+    <view class="user-info flex-col">
+      <text class="user-name">{{userInfo.nickName || '点击设置昵称'}}</text>
+      <text class="user-pets">{{stats.petCount}}只毛孩子</text>
+    </view>
+    <text class="edit-icon">✏️</text>
+  </view>
+
+  <!-- Quick Stats -->
+  <view class="card stats-card">
+    <view class="stats-row flex-row justify-between">
+      <view class="stat-item center flex-col">
+        <text class="stat-value">{{stats.totalDays}}</text>
+        <text class="stat-label">养宠天数</text>
+      </view>
+      <view class="stat-item center flex-col">
+        <text class="stat-value">{{stats.totalLogs}}</text>
+        <text class="stat-label">打卡次数</text>
+      </view>
+      <view class="stat-item center flex-col">
+        <text class="stat-value">¥{{stats.totalSpent}}</text>
+        <text class="stat-label">总花费</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Reminders Section -->
+  <view class="section">
+    <view class="section-header flex-row justify-between">
+      <text class="section-title">智能提醒</text>
+      <text class="section-action" bindtap="addReminder">+ 添加</text>
+    </view>
+    
+    <view class="card" wx:if="{{reminders.length === 0}}">
+      <view class="empty-state center flex-col">
+        <text class="empty-icon">⏰</text>
+        <text class="empty-text">暂无提醒,点击添加</text>
+      </view>
+    </view>
+
+    <block wx:for="{{reminders}}" wx:key="_id">
+      <view class="card reminder-card">
+        <view class="flex-row justify-between">
+          <view class="reminder-info">
+            <text class="reminder-title">{{item.title}}</text>
+            <text class="reminder-time">{{item.time}} · {{item.repeatLabel}}</text>
+          </view>
+          <switch checked="{{item.enabled}}" color="#FFBE00" bindchange="toggleReminder" data-id="{{item._id}}"/>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- Settings Menu -->
+  <view class="section">
+    <text class="section-title">设置</text>
+    <view class="card menu-card">
+      <view class="menu-item flex-row justify-between" bindtap="goToPage" data-page="pets">
+        <text>宠物管理</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item flex-row justify-between" bindtap="goToPage" data-page="items">
+        <text>物品管理</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item flex-row justify-between" bindtap="goToPage" data-page="knowledge">
+        <text>养宠知识</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item flex-row justify-between" bindtap="toggleNotification">
+        <text>消息通知</text>
+        <switch checked="{{notificationEnabled}}" color="#FFBE00"/>
+      </view>
+      <view class="menu-item flex-row justify-between" bindtap="exportData">
+        <text>导出数据</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item flex-row justify-between" bindtap="showAbout">
+        <text>关于我们</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Version -->
+  <view class="version-info center">
+    <text>爪爪手账 v1.0.0</text>
+  </view>
+</view>
+
+<!-- Add Reminder Modal -->
+<view class="modal {{showAddReminder ? 'show' : ''}}" bindtap="closeReminderModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">添加提醒</text>
+      <text class="modal-close" bindtap="closeReminderModal">✕</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-group">
+        <text class="label">提醒类型</text>
+        <picker mode="selector" range="{{reminderTypes}}" bindchange="onReminderTypeChange">
+          <view class="picker">{{newReminder.type || '选择类型'}}</view>
+        </picker>
+      </view>
+      <view class="form-group">
+        <text class="label">提醒时间</text>
+        <picker mode="time" value="{{newReminder.time}}" bindchange="onReminderTimeChange">
+          <view class="picker">{{newReminder.time || '选择时间'}}</view>
+        </picker>
+      </view>
+      <view class="form-group">
+        <text class="label">重复</text>
+        <picker mode="selector" range="{{repeatOptions}}" bindchange="onRepeatChange">
+          <view class="picker">{{newReminder.repeat || '选择重复方式'}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="btn-primary" bindtap="saveReminder">保存提醒</button>
+    </view>
+  </view>
+</view>

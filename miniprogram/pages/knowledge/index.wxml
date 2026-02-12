@@ -1,0 +1,44 @@
+<!--pages/knowledge/index.wxml-->
+<view class="container">
+  <!-- 分类网格 - 5个一行 -->
+  <view class="category-grid">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id"
+      class="category-item {{activeCategory === item.id ? 'active' : ''}}"
+      bindtap="switchCategory"
+      data-id="{{item.id}}"
+    >
+      <text class="cat-emoji">{{item.emoji}}</text>
+      <text class="cat-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 知识列表 -->
+  <view class="knowledge-list" wx:if="{{knowledgeList.length > 0}}">
+    <view 
+      class="knowledge-card" 
+      wx:for="{{knowledgeList}}" 
+      wx:key="_id"
+      bindtap="goDetail"
+      data-id="{{item._id}}"
+    >
+      <!-- 移除图片 -->
+      <view class="info full-width">
+        <text class="title">{{item.title}}</text>
+        <text class="summary">{{item.summary || ''}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <text class="empty-emoji">📚</text>
+    <text class="empty-text">暂无知识内容</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

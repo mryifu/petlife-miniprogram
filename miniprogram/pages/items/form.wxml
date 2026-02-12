@@ -1,0 +1,107 @@
+<!-- pages/items/form.wxml -->
+<view class="container">
+  <view class="form">
+    <!-- Image Upload -->
+    <view class="form-group">
+      <text class="label">物品照片</text>
+      <view class="image-upload" bindtap="chooseImage">
+        <image class="upload-preview" src="{{form.image || '/images/default_item.png'}}" mode="aspectFill" wx:if="{{form.image}}"></image>
+        <view class="upload-placeholder" wx:else>
+          <text class="upload-icon">+</text>
+          <text class="upload-text">添加照片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Name -->
+    <view class="form-group">
+      <text class="label required">物品名称</text>
+      <input class="input" placeholder="例如: 皇家猫粮" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+
+    <!-- Category -->
+    <view class="form-group">
+      <text class="label required">分类</text>
+      <picker mode="selector" range="{{categories}}" range-key="name" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">{{categories[categoryIndex].name}}</view>
+      </picker>
+    </view>
+
+    <!-- Brand -->
+    <view class="form-group">
+      <text class="label">品牌</text>
+      <input class="input" placeholder="例如: Royal Canin" value="{{form.brand}}" bindinput="onInput" data-field="brand" />
+    </view>
+
+    <!-- Type -->
+    <view class="form-group">
+      <text class="label">类型</text>
+      <input class="input" placeholder="例如: 成猫粮" value="{{form.type}}" bindinput="onInput" data-field="type" />
+    </view>
+
+    <!-- Purchase Date -->
+    <view class="form-group">
+      <text class="label">购买日期</text>
+      <picker mode="date" value="{{form.purchaseDate}}" bindchange="onDateChange" data-field="purchaseDate">
+        <view class="picker">{{form.purchaseDate || '选择日期'}}</view>
+      </picker>
+    </view>
+
+    <!-- Expiry Date -->
+    <view class="form-group">
+      <text class="label">过期日期</text>
+      <picker mode="date" value="{{form.expiryDate}}" bindchange="onDateChange" data-field="expiryDate">
+        <view class="picker">{{form.expiryDate || '选择日期'}}</view>
+      </picker>
+    </view>
+
+    <!-- Quantity -->
+    <view class="form-group">
+      <text class="label">数量</text>
+      <input class="input" placeholder="例如: 10kg" value="{{form.quantity}}" bindinput="onInput" data-field="quantity" />
+    </view>
+
+    <!-- Price -->
+    <view class="form-group">
+      <text class="label">价格</text>
+      <input class="input" type="digit" placeholder="例如: 299" value="{{form.price}}" bindinput="onInput" data-field="price" />
+    </view>
+
+    <!-- Medical Items Section -->
+    <view class="medical-section" wx:if="{{form.category === 'medical'}}">
+      <view class="section-divider"></view>
+      <text class="section-title">医疗信息</text>
+
+      <!-- Next Due Date -->
+      <view class="form-group">
+        <text class="label">下次到期日期</text>
+        <picker mode="date" value="{{form.nextDueDate}}" bindchange="onDateChange" data-field="nextDueDate">
+          <view class="picker">{{form.nextDueDate || '选择日期'}}</view>
+        </picker>
+      </view>
+
+      <!-- Reminder Toggle -->
+      <view class="form-group">
+        <view class="switch-row">
+          <text class="label">开启提醒</text>
+          <switch checked="{{form.reminderEnabled}}" color="#34C759" bindchange="onReminderToggle" />
+        </view>
+      </view>
+
+      <!-- Reminder Days -->
+      <view class="form-group" wx:if="{{form.reminderEnabled}}">
+        <text class="label">提前提醒天数</text>
+        <input class="input" type="number" placeholder="例如: 7" value="{{form.reminderDays}}" bindinput="onInput" data-field="reminderDays" />
+      </view>
+    </view>
+
+    <!-- Notes -->
+    <view class="form-group">
+      <text class="label">备注</text>
+      <textarea class="textarea" placeholder="添加备注..." value="{{form.notes}}" bindinput="onInput" data-field="notes" maxlength="200"></textarea>
+    </view>
+
+    <!-- Save Button -->
+    <button class="btn-primary" bindtap="saveItem">{{isEdit ? '保存修改' : '添加物品'}}</button>
+  </view>
+</view>

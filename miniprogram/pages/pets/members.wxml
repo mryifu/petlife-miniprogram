@@ -1,0 +1,39 @@
+<!-- pages/pets/members.wxml -->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">共养成员</text>
+    <text class="page-subtitle">{{petName}}</text>
+  </view>
+
+  <view class="member-list">
+    <view class="member-card" wx:for="{{members}}" wx:key="_id">
+      <view class="member-info">
+        <view class="member-avatar">
+          <text class="avatar-icon">👤</text>
+        </view>
+        <view class="member-details">
+          <text class="member-id">{{item._openid}}</text>
+          <text class="member-time">加入时间：{{item.joinTime}}</text>
+        </view>
+      </view>
+      <view class="member-badges">
+        <view class="badge creator" wx:if="{{item.isCreator}}">创建者</view>
+        <view class="badge me" wx:if="{{item._openid === myOpenid}}">我</view>
+      </view>
+      <view class="member-actions" wx:if="{{isCreator && !item.isCreator}}">
+        <button class="btn-remove" size="mini" bindtap="removeMember" data-openid="{{item._openid}}">
+          移除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons">
+    <button class="btn-primary" bindtap="inviteMember">
+      邀请新成员
+    </button>
+    <button class="btn-secondary" wx:if="{{!isCreator}}" bindtap="leavePet">
+      退出共养
+    </button>
+  </view>
+</view>

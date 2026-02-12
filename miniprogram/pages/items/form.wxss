@@ -1,0 +1,246 @@
+/* pages/items/form.wxss */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFFBF0 0%, #FFF8E7 100%);
+  padding: 32rpx;
+}
+
+.form {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
+  border-radius: 40rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 12rpx 40rpx rgba(197, 157, 95, 0.15);
+  border: 2rpx solid rgba(197, 157, 95, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 36rpx;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+  font-weight: 700;
+}
+
+.label::before {
+  content: '✨';
+  margin-right: 8rpx;
+  font-size: 24rpx;
+}
+
+.label.required::after {
+  content: ' *';
+  color: #FF8BA7;
+  font-size: 32rpx;
+  margin-left: 4rpx;
+}
+
+/* Image Upload - 更可爱 */
+.image-upload {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FFF8E7 0%, #FFFBF0 100%);
+  border: 3rpx dashed #C59D5F;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.image-upload:active {
+  transform: scale(0.98);
+  border-color: #A67C52;
+}
+
+.upload-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}
+
+.upload-icon {
+  font-size: 72rpx;
+  color: #C59D5F;
+  font-weight: 300;
+  margin-bottom: 12rpx;
+}
+
+.upload-text {
+  font-size: 26rpx;
+  color: #C59D5F;
+  font-weight: 600;
+}
+
+/* Input Fields - 更精致 */
+.input {
+  width: 100%;
+  padding: 24rpx;
+  border: 2rpx solid #F0E6D2;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #5C4033;
+  background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E7 100%);
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #C59D5F;
+  background: #FFFBF0;
+  box-shadow: 0 0 0 4rpx rgba(197, 157, 95, 0.1);
+}
+
+.picker {
+  padding: 24rpx;
+  border: 2rpx solid #F0E6D2;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #5C4033;
+  background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E7 100%);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.picker::after {
+  content: '▼';
+  font-size: 20rpx;
+  color: #C59D5F;
+  margin-left: 12rpx;
+}
+
+.picker:active {
+  border-color: #C59D5F;
+  background: #FFFBF0;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 180rpx;
+  padding: 24rpx;
+  border: 2rpx solid #F0E6D2;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #5C4033;
+  background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E7 100%);
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+.textarea:focus {
+  border-color: #C59D5F;
+  background: #FFFBF0;
+  box-shadow: 0 0 0 4rpx rgba(197, 157, 95, 0.1);
+}
+
+/* Medical Section - 特殊样式 */
+.medical-section {
+  margin-top: 40rpx;
+  padding: 32rpx;
+  background: linear-gradient(135deg, rgba(52, 199, 89, 0.05) 0%, rgba(52, 199, 89, 0.02) 100%);
+  border-radius: 24rpx;
+  border: 2rpx solid rgba(52, 199, 89, 0.2);
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20rpx); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.section-divider {
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #34C759, transparent);
+  margin: 32rpx 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #34C759;
+  margin-bottom: 24rpx;
+}
+
+.section-title::before {
+  content: '💊';
+  margin-right: 12rpx;
+  font-size: 32rpx;
+}
+
+.switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 16rpx;
+}
+
+/* Button - 更生动 */
+.btn-primary {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  color: white;
+  border: none;
+  border-radius: 48rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 48rpx;
+  letter-spacing: 2rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:active::before {
+  width: 600rpx;
+  height: 600rpx;
+}
+
+.btn-primary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.3);
+}
+

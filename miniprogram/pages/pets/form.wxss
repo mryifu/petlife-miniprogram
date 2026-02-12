@@ -1,0 +1,151 @@
+/** pages/pets/form.wxss **/
+
+/* Import global styles */
+page {
+  background: linear-gradient(180deg, #FFFBF0 0%, #FFF8E7 100%);
+}
+
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+}
+
+.card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
+  border-radius: 32rpx;
+  padding: 40rpx 32rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 12rpx 40rpx rgba(197, 157, 95, 0.15);
+  border: 2rpx solid rgba(197, 157, 95, 0.1);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-section {
+  margin: 40rpx 0 60rpx;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar-preview {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 6rpx solid #FFFFFF;
+  box-shadow: 0 8rpx 32rpx rgba(197, 157, 95, 0.25);
+  background-color: #F0E6D2;
+  transition: all 0.3s ease;
+}
+
+.avatar-preview:active {
+  transform: scale(0.95);
+}
+
+.avatar-tip {
+  font-size: 26rpx;
+  color: #C59D5F;
+  margin-top: 20rpx;
+  font-weight: 600;
+}
+
+.form-section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #C59D5F;
+  margin-bottom: 24rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid rgba(197, 157, 95, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.form-section-title::before {
+  content: '✨';
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+
+.zodiac-display {
+  padding: 24rpx;
+  background: linear-gradient(135deg, rgba(197, 157, 95, 0.08) 0%, rgba(197, 157, 95, 0.05) 100%);
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: #C59D5F;
+  font-weight: 600;
+  text-align: center;
+  border: 2rpx solid rgba(197, 157, 95, 0.15);
+}
+
+
+.form-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.form-item.no-border {
+  border-bottom: none;
+}
+
+.label {
+  width: 180rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.input, .picker {
+  flex: 1;
+  text-align: right;
+  color: #333333;
+  font-size: 28rpx;
+}
+
+.radio-group {
+  display: flex;
+}
+
+.radio {
+  padding: 10rpx 40rpx;
+  background: #f0f0f0;
+  border-radius: 30rpx;
+  margin-left: 20rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.radio.checked {
+  background: #FFBE00;
+  color: #fff;
+}
+
+.btn-primary {
+  background: #FFBE00;
+  color: #333333;
+  font-weight: bold;
+  border-radius: 999rpx;
+  padding: 20rpx 0;
+  text-align: center;
+  margin: 40rpx 0 20rpx;
+  font-size: 32rpx;
+}

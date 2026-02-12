@@ -1,0 +1,16 @@
+<!--pages/knowledge/detail.wxml-->
+<view class="container" wx:if="{{knowledge}}">
+  <!-- 内容区 -->
+  <view class="content-card full-page">
+    <text class="title">{{knowledge.title}}</text>
+    <view class="meta">
+       <text class="date">📅 {{knowledge._createTime || '最近'}}</text>
+    </view>
+    <text class="content">{{knowledge.content}}</text>
+  </view>
+</view>
+
+<!-- 加载中 -->
+<view class="loading-container" wx:if="{{loading}}">
+  <text>加载中...</text>
+</view>

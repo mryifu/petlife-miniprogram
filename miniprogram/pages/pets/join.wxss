@@ -1,0 +1,116 @@
+/* pages/pets/join.wxss */
+.container {
+  padding: 32rpx;
+  background: #FFFBF0;
+  min-height: 100vh;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #C59D5F;
+}
+
+.join-card {
+  background: white;
+  border-radius: 32rpx;
+  padding: 48rpx;
+  margin-bottom: 48rpx;
+  box-shadow: 0 8rpx 24rpx rgba(92, 64, 51, 0.12);
+}
+
+.input-section {
+  margin-bottom: 32rpx;
+}
+
+.input-label {
+  display: block;
+  font-size: 28rpx;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+}
+
+.code-input {
+  width: 100%;
+  height: 88rpx;
+  background: #F5F5F5;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+  letter-spacing: 8rpx;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  color: #C59D5F;
+}
+
+.btn-join {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #C59D5F 0%, #D4AF6A 100%);
+  color: white;
+  border-radius: 32rpx;
+  font-size: 32rpx;
+  border: none;
+  margin-bottom: 32rpx;
+}
+
+.btn-join[disabled] {
+  opacity: 0.6;
+}
+
+.hint-box {
+  display: flex;
+  align-items: center;
+  background: #FFF9E6;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.hint-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.hint-text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 36rpx;
+}
+
+.help-section {
+  background: white;
+  border-radius: 32rpx;
+  padding: 32rpx;
+}
+
+.help-title {
+  display: block;
+  font-size: 32rpx;
+  color: #5C4033;
+  font-weight: bold;
+  margin-bottom: 24rpx;
+}
+
+.help-text {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 48rpx;
+  margin-bottom: 8rpx;
+}

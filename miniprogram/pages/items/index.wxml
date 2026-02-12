@@ -1,0 +1,81 @@
+<!-- pages/items/index.wxml -->
+<view class="container">
+  <!-- Pet Selector -->
+  <view class="pet-selector" wx:if="{{pets.length > 0}}">
+    <picker mode="selector" range="{{pets}}" range-key="name" value="{{pets.indexOf(currentPet)}}" bindchange="onPetChange">
+      <view class="picker-view flex-row">
+        <image class="pet-avatar-small" src="{{currentPet.avatar}}" mode="aspectFill"></image>
+        <text class="pet-name">{{currentPet.name}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- Empty State -->
+  <view class="empty-state center flex-col" wx:if="{{pets.length === 0}}">
+    <text class="empty-icon">🐾</text>
+    <text class="empty-text">还没有宠物</text>
+    <text class="empty-hint">先去添加一只毛孩子吧</text>
+  </view>
+
+  <view wx:else>
+    <!-- Category Tabs -->
+    <scroll-view class="category-tabs" scroll-x>
+      <view class="tabs-wrapper">
+        <block wx:for="{{categories}}" wx:key="id">
+          <view class="tab-item {{activeCategory === item.id ? 'active' : ''}}"
+                bindtap="onCategoryChange"
+                data-id="{{item.id}}"
+                style="border-color: {{item.color}}; color: {{activeCategory === item.id ? item.color : '#BCAAA4'}}">
+            <text class="tab-emoji">{{item.emoji}}</text>
+            <text class="tab-name">{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+
+    <!-- Items List -->
+    <view class="items-list">
+      <view class="empty-state center flex-col" wx:if="{{filteredItems.length === 0}}">
+        <text class="empty-icon">📦</text>
+        <text class="empty-text">暂无{{activeCategoryName}}物品</text>
+        <text class="empty-hint">点击右下角添加</text>
+      </view>
+
+      <block wx:for="{{filteredItems}}" wx:key="_id">
+        <view class="item-card" bindtap="editItem" data-id="{{item._id}}">
+          <image class="item-image" src="{{item.image || '/images/default_item.png'}}" mode="aspectFill"></image>
+          <view class="item-info">
+            <view class="item-header">
+              <text class="item-name">{{item.name}}</text>
+              <view class="status-badge" style="background: {{item.statusBadge.color}}">
+                <text>{{item.statusBadge.text}}</text>
+              </view>
+            </view>
+            <text class="item-brand" wx:if="{{item.brand}}">{{item.brand}}</text>
+            <view class="item-details">
+              <text class="item-detail" wx:if="{{item.quantity}}">数量: {{item.quantity}}</text>
+              <text class="item-detail" wx:if="{{item.price}}">¥{{item.price}}</text>
+            </view>
+            <view class="item-dates">
+              <text class="item-date" wx:if="{{item.purchaseDate}}">购买: {{item.purchaseDate}}</text>
+              <text class="item-date" wx:if="{{item.expiryDate}}">过期: {{item.expiryDate}}</text>
+              <text class="item-date medical" wx:if="{{item.isMedical && item.nextDueDate}}">到期: {{item.nextDueDate}}</text>
+            </view>
+          </view>
+          <view class="item-actions">
+            <view class="action-btn delete" catchtap="deleteItem" data-id="{{item._id}}">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- FAB Button -->
+  <view class="fab" bindtap="addItem" wx:if="{{pets.length > 0}}">
+    <text class="fab-icon">+</text>
+  </view>
+</view>
+

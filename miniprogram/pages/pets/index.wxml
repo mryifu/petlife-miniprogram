@@ -1,0 +1,121 @@
+<!-- pages/pets/index.wxml -->
+<view class="container">
+  <!-- Empty State -->
+  <view class="empty-state center flex-col" wx:if="{{pets.length === 0}}">
+    <image src="../../images/empty_pet.png" mode="aspectFit" class="empty-img"></image>
+    <text class="empty-text">还没有萌宠档案哦</text>
+    <view class="empty-actions">
+      <navigator url="/pages/pets/form" class="btn-primary add-btn-large">
+        <text>+ 添加宠物</text>
+      </navigator>
+      <navigator url="/pages/pets/join" class="btn-secondary add-btn-large">
+        <text>🤝 加入共养</text>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- Pet List -->
+  <view class="pet-list" wx:else>
+    <view class="section-hint">点击卡片查看详情，长按编辑信息</view>
+
+    <block wx:for="{{pets}}" wx:key="_id">
+      <!-- 身份证样式卡片 -->
+      <view class="pet-id-card" bindtap="selectPet" bindlongpress="editPet" data-id="{{item._id}}">
+        <!-- 顶部装饰条 -->
+        <view class="card-header">
+          <text class="card-title">🐾 宠物身份证</text>
+          <view class="card-number">No.{{index + 1}}</view>
+        </view>
+
+        <!-- 主要信息区 -->
+        <view class="card-body">
+          <!-- 左侧头像 -->
+          <view class="avatar-section">
+            <image class="pet-avatar-large" src="{{item.avatar || '/images/default_avatar.png'}}" mode="aspectFill"></image>
+            <view class="gender-badge {{item.gender}}">
+              {{item.gender === 'male' ? '♂' : '♀'}}
+            </view>
+          </view>
+
+          <!-- 右侧信息 -->
+          <view class="info-section">
+            <view class="name-row">
+              <text class="pet-name-large">{{item.name}}</text>
+              <view class="neutered-badge" wx:if="{{item.is_neutered}}">已绝育</view>
+            </view>
+
+            <view class="info-grid">
+              <view class="info-item">
+                <text class="info-label">品种</text>
+                <text class="info-value">{{item.species}}</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">年龄</text>
+                <text class="info-value">{{item.ageStr}}</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">生日</text>
+                <text class="info-value">{{item.birthday || '未设置'}}</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">星座</text>
+                <text class="info-value">{{item.zodiac || '未知'}}</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">体重</text>
+                <text class="info-value">{{item.weight}}kg</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">毛色</text>
+                <text class="info-value">{{item.color || '未设置'}}</text>
+              </view>
+            </view>
+
+            <!-- 性格标签 -->
+            <view class="personality-row" wx:if="{{item.personality}}">
+              <text class="personality-label">性格：</text>
+              <view class="personality-tag">{{item.personality}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 底部操作区 -->
+        <view class="card-footer">
+          <view class="footer-item" catchtap="viewWeightChart" data-id="{{item._id}}">
+            <text class="footer-icon">📊</text>
+            <text class="footer-text">体重</text>
+          </view>
+          <view class="footer-item" catchtap="viewBills" data-id="{{item._id}}">
+            <text class="footer-icon">💰</text>
+            <text class="footer-text">消费</text>
+          </view>
+          <view class="footer-item" catchtap="viewMembers" data-id="{{item._id}}">
+            <text class="footer-icon">👥</text>
+            <text class="footer-text">成员{{item.memberCount > 1 ? '(' + item.memberCount + ')' : ''}}</text>
+          </view>
+          <view class="footer-item" catchtap="editPet" data-id="{{item._id}}">
+            <text class="footer-icon">✏️</text>
+            <text class="footer-text">编辑</text>
+          </view>
+        </view>
+
+        <!-- 当前选中标识 -->
+        <view class="selected-badge" wx:if="{{item.isSelected}}">
+          <text>当前宠物</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 添加按钮 -->
+    <navigator url="/pages/pets/form" class="add-pet-btn">
+      <text class="add-icon">+</text>
+      <text class="add-text">添加新宠物</text>
+    </navigator>
+
+    <!-- 加入共养按钮 -->
+    <navigator url="/pages/pets/join" class="join-pet-btn">
+      <text class="join-icon">🤝</text>
+      <text class="join-text">加入共养</text>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,83 @@
+<!-- pages/pets/form.wxml -->
+<view class="container">
+  <form bindsubmit="savePet">
+    <!-- Avatar Upload -->
+    <view class="avatar-section center flex-col" bindtap="chooseAvatar">
+      <image class="avatar-preview" src="{{avatarUrl || '/images/default_avatar.png'}}" mode="aspectFill"></image>
+      <text class="avatar-tip">点击更换头像</text>
+    </view>
+
+    <!-- Info Form -->
+    <view class="card form-card">
+      <view class="form-section-title">基本信息</view>
+
+      <view class="form-item">
+        <text class="label">昵称</text>
+        <input class="input" name="name" placeholder="请输入宠物昵称" value="{{name}}" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">品种</text>
+        <picker mode="selector" range="{{speciesList}}" bindchange="onSpeciesChange">
+          <view class="picker">
+            {{species || '选择品种'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">性别</text>
+        <radio-group class="radio-group" name="gender" bindchange="onGenderChange">
+          <label class="radio {{gender === 'male' ? 'checked' : ''}}" data-value="male" bindtap="radioTap">
+            公
+            <radio value="male" checked="{{gender === 'male'}}" hidden/>
+          </label>
+          <label class="radio {{gender === 'female' ? 'checked' : ''}}" data-value="female" bindtap="radioTap">
+            母
+            <radio value="female" checked="{{gender === 'female'}}" hidden/>
+          </label>
+        </radio-group>
+      </view>
+
+      <view class="form-item">
+        <text class="label">生日</text>
+        <picker mode="date" value="{{birth}}" bindchange="onDateChange">
+          <view class="picker">
+            {{birth || '选择生日'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">星座</text>
+        <view class="zodiac-display">{{zodiac || '选择生日后自动计算'}}</view>
+      </view>
+
+      <view class="form-item">
+        <text class="label">体重 (kg)</text>
+        <input class="input" type="digit" name="weight" placeholder="0.0" value="{{current_weight}}" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">毛色</text>
+        <input class="input" name="color" placeholder="例如：橘色、黑白" value="{{color}}" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">性格</text>
+        <picker mode="selector" range="{{personalityList}}" bindchange="onPersonalityChange">
+          <view class="picker">
+            {{personality || '选择性格'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item no-border">
+        <text class="label">绝育状态</text>
+        <switch checked="{{is_neutered}}" color="#C59D5F" bindchange="onNeuteredChange"/>
+      </view>
+    </view>
+
+    <button class="btn-primary" form-type="submit">保存档案</button>
+  </form>
+</view>

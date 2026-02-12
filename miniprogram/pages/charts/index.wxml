@@ -1,0 +1,136 @@
+<!-- pages/charts/index.wxml -->
+<view class="container">
+  <!-- Tab Switcher -->
+  <view class="tab-bar flex-row">
+    <view class="tab-item {{activeTab === 'weight' ? 'active' : ''}}" bindtap="switchTab" data-tab="weight">
+      <text>体重追踪</text>
+    </view>
+    <view class="tab-item {{activeTab === 'expense' ? 'active' : ''}}" bindtap="switchTab" data-tab="expense">
+      <text>养宠账单</text>
+    </view>
+  </view>
+
+  <!-- Weight Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 'weight'}}">
+    <!-- Quick Add Weight -->
+    <view class="card add-weight-card">
+      <view class="flex-row justify-between">
+        <text class="card-title">记录体重</text>
+        <text class="weight-date">{{today}}</text>
+      </view>
+      <view class="weight-input-row flex-row">
+        <input class="weight-input" type="digit" placeholder="0.0" value="{{newWeight}}" bindinput="onWeightInput"/>
+        <text class="weight-unit">kg</text>
+        <button class="btn-small" bindtap="addWeight">记录</button>
+      </view>
+    </view>
+
+    <!-- Weight Chart -->
+    <view class="card chart-card">
+      <text class="card-title">体重趋势</text>
+      <view class="chart-container">
+        <canvas canvas-id="weightChart" id="weightChart" class="chart-canvas"></canvas>
+      </view>
+      <view class="chart-summary flex-row justify-between">
+        <view class="summary-item">
+          <text class="summary-label">当前</text>
+          <text class="summary-value">{{currentWeight}} kg</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">最高</text>
+          <text class="summary-value">{{maxWeight}} kg</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">最低</text>
+          <text class="summary-value">{{minWeight}} kg</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Weight History -->
+    <view class="card">
+      <text class="card-title">历史记录</text>
+      <view class="history-list">
+        <block wx:for="{{weightHistory}}" wx:key="date">
+          <view class="history-item flex-row justify-between">
+            <text class="history-date">{{item.date}}</text>
+            <text class="history-value">{{item.weight}} kg</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- Expense Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 'expense'}}">
+    <!-- Monthly Summary -->
+    <view class="card expense-summary">
+      <view class="flex-row justify-between">
+        <text class="card-title">{{currentMonth}}月支出</text>
+        <picker mode="selector" range="{{months}}" bindchange="onMonthChange">
+          <text class="month-picker">切换月份 ▼</text>
+        </picker>
+      </view>
+      <text class="total-amount">¥ {{totalExpense}}</text>
+    </view>
+
+    <!-- Expense Chart (Pie) -->
+    <view class="card chart-card">
+      <text class="card-title">支出分类</text>
+      <view class="chart-container">
+        <canvas canvas-id="expenseChart" id="expenseChart" class="chart-canvas"></canvas>
+      </view>
+      <view class="legend-list">
+        <block wx:for="{{expenseCategories}}" wx:key="name">
+          <view class="legend-item flex-row">
+            <view class="legend-dot" style="background: {{item.color}};"></view>
+            <text class="legend-name">{{item.name}}</text>
+            <text class="legend-amount">¥{{item.amount}}</text>
+            <text class="legend-percent">{{item.percent}}%</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- Add Expense -->
+    <view class="card">
+      <text class="card-title">添加支出</text>
+      <view class="expense-form">
+        <view class="form-row flex-row">
+          <text class="form-label">金额</text>
+          <input class="form-input" type="digit" placeholder="0.00" value="{{newExpense.amount}}" bindinput="onExpenseAmountInput"/>
+        </view>
+        <view class="form-row flex-row">
+          <text class="form-label">分类</text>
+          <picker mode="selector" range="{{expenseTypes}}" bindchange="onExpenseTypeChange">
+            <view class="form-picker">{{newExpense.type || '选择分类'}}</view>
+          </picker>
+        </view>
+        <view class="form-row flex-row">
+          <text class="form-label">备注</text>
+          <input class="form-input" placeholder="可选" value="{{newExpense.note}}" bindinput="onExpenseNoteInput"/>
+        </view>
+        <button class="btn-primary" bindtap="addExpense">记录支出</button>
+      </view>
+    </view>
+
+    <!-- Recent Expenses -->
+    <view class="card">
+      <text class="card-title">最近支出</text>
+      <view class="expense-list">
+        <block wx:for="{{recentExpenses}}" wx:key="_id">
+          <view class="expense-item flex-row justify-between">
+            <view class="expense-info">
+              <text class="expense-type-tag" style="background: {{item.color}};">{{item.type}}</text>
+              <text class="expense-note">{{item.note || '无备注'}}</text>
+            </view>
+            <view class="expense-right">
+              <text class="expense-amount">-¥{{item.amount}}</text>
+              <text class="expense-date">{{item.date}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

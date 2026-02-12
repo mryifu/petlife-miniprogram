@@ -1,0 +1,370 @@
+/** pages/pets/index.wxss **/
+
+page {
+  background: linear-gradient(180deg, #FFFBF0 0%, #FFF8E7 100%);
+}
+
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+}
+
+/* Empty State */
+.empty-state {
+  margin-top: 200rpx;
+  text-align: center;
+}
+
+.empty-img {
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.5;
+  margin-bottom: 40rpx;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12rpx); }
+}
+
+.empty-text {
+  color: #5C4033;
+  margin-bottom: 60rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: 48rpx;
+  padding: 24rpx 64rpx;
+  text-align: center;
+  font-size: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.3);
+}
+
+.add-btn-large {
+  display: inline-block;
+}
+
+/* Pet List */
+.pet-list {
+  padding-bottom: 40rpx;
+}
+
+.section-hint {
+  font-size: 26rpx;
+  color: #BCAAA4;
+  text-align: center;
+  margin-bottom: 32rpx;
+  padding: 16rpx;
+  background: rgba(197, 157, 95, 0.08);
+  border-radius: 24rpx;
+}
+
+/* 身份证样式卡片 */
+.pet-id-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
+  border-radius: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 12rpx 40rpx rgba(197, 157, 95, 0.15);
+  overflow: hidden;
+  position: relative;
+  border: 2rpx solid rgba(197, 157, 95, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 顶部装饰条 */
+.card-header {
+  background: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  padding: 20rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 2rpx;
+}
+
+.card-number {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 700;
+}
+
+/* 主要信息区 */
+.card-body {
+  padding: 32rpx;
+  display: flex;
+  gap: 24rpx;
+}
+
+.avatar-section {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pet-avatar-large {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 24rpx;
+  border: 4rpx solid #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.2);
+}
+
+.gender-badge {
+  position: absolute;
+  bottom: -8rpx;
+  right: -8rpx;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  line-height: 56rpx;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.gender-badge.male {
+  background: linear-gradient(135deg, #5AC8FA 0%, #007AFF 100%);
+}
+
+.gender-badge.female {
+  background: linear-gradient(135deg, #FF8BA7 0%, #FF6B8A 100%);
+}
+
+/* 右侧信息 */
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.pet-name-large {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #5C4033;
+  letter-spacing: 1rpx;
+}
+
+.neutered-badge {
+  font-size: 20rpx;
+  color: #95D1CC;
+  background: rgba(149, 209, 204, 0.15);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 700;
+  border: 2rpx solid rgba(149, 209, 204, 0.3);
+}
+
+/* 信息网格 */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16rpx;
+}
+
+.info-item {
+  background: rgba(197, 157, 95, 0.05);
+  padding: 16rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(197, 157, 95, 0.1);
+}
+
+.info-label {
+  font-size: 22rpx;
+  color: #C59D5F;
+  display: block;
+  margin-bottom: 6rpx;
+  font-weight: 700;
+}
+
+.info-value {
+  font-size: 26rpx;
+  color: #5C4033;
+  font-weight: 600;
+}
+
+/* 性格标签 */
+.personality-row {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.personality-label {
+  font-size: 24rpx;
+  color: #8D7B68;
+  margin-right: 12rpx;
+}
+
+.personality-tag {
+  font-size: 24rpx;
+  color: #FF8BA7;
+  background: linear-gradient(135deg, rgba(255, 139, 167, 0.15) 0%, rgba(255, 107, 138, 0.1) 100%);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  font-weight: 700;
+  border: 2rpx solid rgba(255, 139, 167, 0.2);
+}
+
+/* 底部操作区 */
+.card-footer {
+  display: flex;
+  border-top: 2rpx solid rgba(197, 157, 95, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 251, 240, 0.5) 100%);
+}
+
+.footer-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  gap: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.footer-item:active {
+  background: rgba(197, 157, 95, 0.1);
+}
+
+.footer-item:not(:last-child) {
+  border-right: 1rpx solid rgba(197, 157, 95, 0.1);
+}
+
+.footer-icon {
+  font-size: 36rpx;
+}
+
+.footer-text {
+  font-size: 22rpx;
+  color: #8D7B68;
+  font-weight: 600;
+}
+
+/* 当前选中标识 */
+.selected-badge {
+  position: absolute;
+  top: 60rpx;
+  right: -20rpx;
+  background: linear-gradient(135deg, #FFB84D 0%, #FF9500 100%);
+  color: white;
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 8rpx 32rpx 8rpx 24rpx;
+  border-radius: 24rpx 0 0 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 149, 0, 0.4);
+  letter-spacing: 1rpx;
+}
+
+/* 添加按钮 */
+.add-pet-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  background: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  color: white;
+  padding: 32rpx;
+  border-radius: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.3);
+  margin-top: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.add-pet-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.3);
+}
+
+.add-icon {
+  font-size: 48rpx;
+  font-weight: 300;
+}
+
+.add-text {
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+/* 空状态按钮容器 */
+.empty-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  width: 100%;
+  max-width: 500rpx;
+}
+
+/* 次要按钮样式 */
+.btn-secondary {
+  background: white;
+  color: #C59D5F;
+  border: 3rpx solid #C59D5F;
+  font-weight: 700;
+  border-radius: 48rpx;
+  padding: 24rpx 64rpx;
+  text-align: center;
+  font-size: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.15);
+}
+
+/* 加入共养按钮 */
+.join-pet-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  background: white;
+  color: #C59D5F;
+  border: 3rpx solid #C59D5F;
+  padding: 32rpx;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.15);
+  margin-top: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.join-pet-btn:active {
+  transform: scale(0.98);
+  background: rgba(197, 157, 95, 0.05);
+}
+
+.join-icon {
+  font-size: 48rpx;
+}
+
+.join-text {
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}

@@ -1,0 +1,148 @@
+/* pages/knowledge/index.wxss */
+
+.container {
+  padding: 20rpx;
+  padding-bottom: 160rpx;
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+/* 分类网格 - 5个一行 */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16rpx;
+  margin-bottom: 30rpx;
+  padding: 0 10rpx;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 0;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s;
+}
+
+.category-item.active {
+  background: var(--primary-color);
+  transform: scale(1.02);
+}
+
+.category-item.active .cat-name {
+  color: var(--white);
+}
+
+.cat-emoji {
+  font-size: 36rpx;
+  margin-bottom: 8rpx;
+}
+
+.cat-name {
+  font-size: 22rpx;
+  color: var(--text-main);
+}
+
+/* 知识卡片 */
+.knowledge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.knowledge-card {
+  display: flex;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  padding: 10rpx 0; /* 增加一点内边距 */
+}
+
+/* 纯文本模式样式 */
+.knowledge-card .info.full-width {
+  flex: 1;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.knowledge-card .title {
+  font-size: 32rpx; /* 字体稍微加大 */
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+.knowledge-card .summary {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 显示更多行 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+}
+
+.empty-emoji {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: var(--text-main);
+  margin-bottom: 10rpx;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* 加载 */
+.loading {
+  text-align: center;
+  padding: 40rpx;
+  color: var(--text-secondary);
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 180rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(166, 124, 82, 0.4);
+  z-index: 100;
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+.fab-icon {
+  font-size: 50rpx;
+  color: var(--white);
+  font-weight: 300;
+}

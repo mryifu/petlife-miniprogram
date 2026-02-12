@@ -1,0 +1,107 @@
+<!-- pages/album/index.wxml -->
+<view class="container">
+  <!-- Pet Selector -->
+  <view class="pet-selector" wx:if="{{pets.length > 0}}">
+    <picker mode="selector" range="{{pets}}" range-key="name" value="{{pets.indexOf(currentPet)}}" bindchange="onPetChange">
+      <view class="picker-view flex-row">
+        <image class="pet-avatar-small" src="{{currentPet.avatar}}" mode="aspectFill"></image>
+        <text class="pet-name">{{currentPet.name}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- Empty State -->
+  <view class="empty-state center flex-col" wx:if="{{pets.length === 0}}">
+    <text class="empty-icon">🐾</text>
+    <text class="empty-text">还没有宠物</text>
+    <text class="empty-hint">先去添加一只毛孩子吧</text>
+  </view>
+
+  <view class="empty-state center flex-col" wx:elif="{{groupedAlbums.length === 0}}">
+    <text class="empty-icon">📷</text>
+    <text class="empty-text">还没有照片</text>
+    <text class="empty-hint">点击右下角添加照片</text>
+  </view>
+
+  <!-- Timeline -->
+  <view class="timeline" wx:else>
+    <block wx:for="{{groupedAlbums}}" wx:key="date">
+      <view class="date-group">
+        <view class="date-header">
+          <text class="date-label">{{item.dateLabel}}</text>
+        </view>
+        <view class="photo-grid">
+          <block wx:for="{{item.items}}" wx:key="_id" wx:for-item="album">
+            <view class="photo-card" bindtap="viewPhoto" data-id="{{album._id}}">
+              <image class="photo-image" src="{{album.image}}" mode="aspectFill"></image>
+              <view class="photo-info">
+                <text class="photo-time">{{album.time}}</text>
+                <text class="photo-desc" wx:if="{{album.description}}">{{album.description}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- FAB Button -->
+  <view class="fab" bindtap="showAddAlbum" wx:if="{{pets.length > 0}}">
+    <text class="fab-icon">+</text>
+  </view>
+</view>
+
+<!-- Add Album Bottom Sheet -->
+<view class="bottom-sheet {{showAddSheet ? 'show' : ''}}" bindtap="closeAddSheet">
+  <view class="sheet-content" catchtap="stopPropagation">
+    <view class="sheet-header">
+      <text class="sheet-title">添加照片</text>
+      <text class="sheet-close" bindtap="closeAddSheet">✕</text>
+    </view>
+
+    <view class="sheet-body">
+      <!-- Image Picker -->
+      <view class="form-group">
+        <text class="label">照片 (最多9张)</text>
+        <view class="image-picker">
+          <block wx:for="{{newAlbum.images}}" wx:key="index">
+            <view class="image-item">
+              <image class="preview-image" src="{{item}}" mode="aspectFill"></image>
+              <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">✕</view>
+            </view>
+          </block>
+          <view class="add-image-btn" bindtap="chooseImages" wx:if="{{newAlbum.images.length < 9}}">
+            <text class="add-icon">+</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Description -->
+      <view class="form-group">
+        <text class="label">描述</text>
+        <textarea class="textarea" placeholder="记录这一刻..." value="{{newAlbum.description}}" bindinput="onDescriptionInput" maxlength="200"></textarea>
+      </view>
+
+      <!-- Date -->
+      <view class="form-group">
+        <text class="label">日期</text>
+        <picker mode="date" value="{{newAlbum.date}}" bindchange="onDateChange">
+          <view class="picker">{{newAlbum.date}}</view>
+        </picker>
+      </view>
+
+      <!-- Time -->
+      <view class="form-group">
+        <text class="label">时间</text>
+        <picker mode="time" value="{{newAlbum.time}}" bindchange="onTimeChange">
+          <view class="picker">{{newAlbum.time}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="sheet-footer">
+      <button class="btn-primary" bindtap="saveAlbum">保存</button>
+    </view>
+  </view>
+</view>

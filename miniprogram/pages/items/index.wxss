@@ -1,0 +1,350 @@
+/* pages/items/index.wxss */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFFBF0 0%, #FFF8E7 100%);
+  padding-bottom: 140rpx;
+}
+
+/* Pet Selector - 更可爱 */
+.pet-selector {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
+  padding: 28rpx 32rpx;
+  margin: 24rpx 32rpx 0;
+  border-radius: 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(197, 157, 95, 0.15);
+  border: 2rpx solid rgba(197, 157, 95, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pet-selector::before {
+  content: '📦';
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 80rpx;
+  opacity: 0.05;
+}
+
+.picker-view {
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.pet-avatar-small {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 3rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(197, 157, 95, 0.2);
+}
+
+.pet-name {
+  flex: 1;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #5C4033;
+  letter-spacing: 1rpx;
+}
+
+.picker-arrow {
+  font-size: 28rpx;
+  color: #C59D5F;
+  font-weight: 600;
+}
+
+/* Category Tabs - 更生动 */
+.category-tabs {
+  padding: 24rpx 0;
+  white-space: nowrap;
+}
+
+.tabs-wrapper {
+  display: inline-flex;
+  padding: 0 32rpx;
+  gap: 16rpx;
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  border: 3rpx solid transparent;
+  border-radius: 48rpx;
+  background: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-item.active {
+  border-width: 3rpx;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 240, 0.95) 100%);
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.15);
+  transform: translateY(-2rpx);
+}
+
+.tab-item.active::before {
+  opacity: 0.05;
+}
+
+.tab-emoji {
+  font-size: 36rpx;
+  margin-right: 10rpx;
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.tab-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+/* Empty State - 更生动 */
+.empty-state {
+  padding: 200rpx 0;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 140rpx;
+  margin-bottom: 32rpx;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12rpx) rotate(5deg); }
+}
+
+.empty-text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #5C4033;
+  margin-bottom: 16rpx;
+}
+
+.empty-hint {
+  font-size: 28rpx;
+  color: #BCAAA4;
+  line-height: 1.6;
+}
+
+/* Items List - 更精致 */
+.items-list {
+  padding: 0 32rpx;
+}
+
+.item-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
+  border-radius: 28rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.12);
+  display: flex;
+  gap: 20rpx;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.item-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rpx;
+  height: 100%;
+  background: linear-gradient(180deg, #C59D5F 0%, #A67C52 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.item-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.15);
+}
+
+.item-card:active::before {
+  opacity: 1;
+}
+
+.item-image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.15);
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  justify-content: center;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.item-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #5C4033;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-badge {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: white;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+  letter-spacing: 1rpx;
+}
+
+.item-brand {
+  font-size: 26rpx;
+  color: #C59D5F;
+  font-weight: 600;
+}
+
+.item-details {
+  display: flex;
+  gap: 20rpx;
+  flex-wrap: wrap;
+}
+
+.item-detail {
+  font-size: 26rpx;
+  color: #5C4033;
+  background: rgba(197, 157, 95, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.item-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.item-date {
+  font-size: 24rpx;
+  color: #BCAAA4;
+  display: flex;
+  align-items: center;
+}
+
+.item-date::before {
+  content: '📅';
+  margin-right: 6rpx;
+  font-size: 20rpx;
+}
+
+.item-date.medical {
+  color: #34C759;
+  font-weight: 700;
+}
+
+.item-date.medical::before {
+  content: '💊';
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 12rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.action-btn.delete {
+  background: linear-gradient(135deg, #FF8BA7 0%, #FF6B8A 100%);
+  color: white;
+}
+
+/* FAB Button - 更生动 */
+.fab {
+  position: fixed;
+  right: 32rpx;
+  bottom: 120rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  box-shadow: 0 12rpx 40rpx rgba(197, 157, 95, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.4);
+}
+
+.fab-icon {
+  font-size: 72rpx;
+  color: white;
+  font-weight: 300;
+  line-height: 1;
+}
+

@@ -1,0 +1,89 @@
+/* pages/knowledge/detail.wxss */
+
+.container {
+  padding: 30rpx;
+  padding-bottom: 160rpx;
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+.content-card {
+  background: var(--white);
+  padding: 40rpx;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  min-height: 600rpx;
+}
+
+.title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 20rpx;
+  line-height: 1.4;
+}
+
+.meta {
+  margin-bottom: 40rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.date {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.content {
+  display: block;
+  font-size: 32rpx;
+  color: var(--text-main);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+
+/* 操作栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 20rpx 40rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: var(--white);
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.action-btn.edit {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.action-btn.delete {
+  background: var(--bg-warm);
+  color: var(--danger);
+}
+
+/* 加载 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+  color: var(--text-secondary);
+}

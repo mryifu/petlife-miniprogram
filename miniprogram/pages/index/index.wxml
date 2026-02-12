@@ -1,0 +1,181 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  
+  <!-- 顶部宠物卡片 -->
+  <view class="card pet-card flex-row" bindtap="switchPet">
+    <view class="pet-info flex-row">
+      <view class="pet-avatar-wrapper">
+        <image class="pet-avatar" src="{{currentPet.avatar || '/images/default_avatar.png'}}" mode="aspectFill"/>
+        <view class="gender-icon">
+          <text wx:if="{{currentPet.gender == 'female'}}">♀</text>
+          <text wx:else>♂</text>
+        </view>
+      </view>
+      <view class="pet-basic flex-col">
+        <view class="pet-header flex-row">
+          <text class="pet-name">{{currentPet.name}}</text>
+          <text class="pet-status">今天 {{logs.length}} 条记录</text>
+        </view>
+        <text class="pet-desc">{{currentPet.species}} · {{currentPet.ageStr || '未知年龄'}}</text>
+      </view>
+    </view>
+    <view class="switch-btn">
+      <text>⇄</text>
+    </view>
+  </view>
+
+  <!-- 时间轴 -->
+  <view class="timeline">
+    <view class="timeline-title">今日足迹</view>
+    
+    <view class="timeline-list">
+      <view class="timeline-line"></view>
+      
+      <block wx:for="{{logs}}" wx:key="_id">
+        <view class="log-item">
+          <view class="log-dot" style="border-color: {{item.color}}"></view>
+          
+          <view class="log-card" bindlongpress="deleteLog" data-id="{{item._id}}" data-index="{{index}}">
+            <view class="log-header flex-row">
+              <text class="log-time">{{item.timeStr}}</text>
+              <text class="log-tag" style="background: {{item.color}}20; color: {{item.color}}">
+                {{item.typeLabel}}
+              </text>
+            </view>
+            
+            <view class="log-content" wx:if="{{item.note}}">
+              <text>{{item.note}}</text>
+            </view>
+            
+            <view class="log-images" wx:if="{{item.images && item.images.length > 0}}">
+              <image 
+                wx:for="{{item.images}}" 
+                wx:key="*this"
+                wx:for-item="img"
+                class="log-img" 
+                src="{{img}}" 
+                mode="aspectFill"
+                catchtap="previewImage"
+                data-urls="{{item.images}}"
+                data-current="{{img}}"
+              />
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <!-- 空状态 -->
+      <view class="empty-timeline" wx:if="{{logs.length === 0}}">
+        <text style="font-size: 26rpx; color: var(--text-placeholder);">今天还没有记录哦，点右下角添加~</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史足迹 -->
+  <view class="history-section" wx:if="{{historyLogs.length > 0}}">
+    <view class="history-header">
+      <text class="history-title">📜 历史足迹</text>
+      <text class="history-subtitle">最近7天</text>
+    </view>
+
+    <view class="history-list">
+      <block wx:for="{{historyLogs}}" wx:key="date">
+        <view class="history-item">
+          <view class="history-date">{{item.dateStr}}</view>
+          <view class="history-logs">
+            <view class="history-log" wx:for="{{item.logs}}" wx:key="_id" wx:for-item="log">
+              <text class="history-emoji" style="background: {{log.color}}20;">{{log.emoji}}</text>
+              <text class="history-type">{{log.typeLabel}}</text>
+              <text class="history-time">{{log.timeStr}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 全局添加按钮 FAB -->
+  <view class="fab" bindtap="openLogSheet">
+    <text class="fab-icon">+</text>
+  </view>
+
+  <!-- 动态打卡弹窗 (Bottom Sheet) -->
+  <view class="action-sheet-mask {{showActionSheet ? 'show' : ''}}" bindtap="closeLogSheet">
+    <view class="action-sheet" catchtap="stopPropagation">
+      
+      <!-- 弹窗标题栏 -->
+      <view class="sheet-header">
+        <text class="sheet-title" wx:if="{{logStep === 1}}">记录什么？</text>
+        <view class="flex-row" wx:else bindtap="backToStep1">
+          <text style="font-size: 36rpx; margin-right: 10rpx;">‹</text>
+          <text class="sheet-title">{{currentLog.typeLabel}}</text>
+        </view>
+        <text class="sheet-close" bindtap="closeLogSheet">✕</text>
+      </view>
+      
+      <view class="step-container">
+        
+        <!-- Step 1: 选择类型 -->
+        <view class="step-content" wx:if="{{logStep === 1}}">
+          <view class="type-grid">
+            <view 
+              class="type-item" 
+              wx:for="{{actionTypes}}" 
+              wx:key="type"
+              bindtap="selectLogType" 
+              data-type="{{item.type}}"
+            >
+              <view class="type-icon-box">
+                <text>{{item.emoji}}</text>
+              </view>
+              <text class="type-name">{{item.label}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- Step 2: 填写详情 -->
+        <view class="step-content form-content" wx:if="{{logStep === 2}}">
+          <view class="form-group">
+            <text class="label">时间</text>
+            <picker mode="time" value="{{currentLog.time}}" bindchange="onTimeChange">
+              <view class="picker">{{currentLog.time}}</view>
+            </picker>
+          </view>
+          
+          <view class="form-group">
+            <text class="label">备注</text>
+            <input 
+              class="input" 
+              placeholder="写点什么备注..." 
+              value="{{currentLog.note}}"
+              bindinput="onNoteInput"
+            />
+          </view>
+
+          <view class="form-group">
+            <text class="label">照片</text>
+            <view class="img-list">
+              <view 
+                class="img-item" 
+                wx:for="{{currentLog.images}}" 
+                wx:key="*this"
+              >
+                <image src="{{item}}" mode="aspectFill"/>
+                <view class="img-del" catchtap="deleteImage" data-index="{{index}}">✕</view>
+              </view>
+              <view class="img-add" bindtap="chooseImage" wx:if="{{currentLog.images.length < 3}}">
+                <text>+</text>
+              </view>
+            </view>
+          </view>
+
+          <button class="btn-primary {{saving?'disabled':''}}" bindtap="saveLog">
+            {{saving ? '保存中...' : '确认打卡'}}
+          </button>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+</view>

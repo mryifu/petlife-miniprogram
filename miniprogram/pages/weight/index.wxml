@@ -1,0 +1,156 @@
+<!-- pages/weight/index.wxml -->
+<view class="container">
+  <!-- 宠物信息卡片 -->
+  <view class="pet-header-card" wx:if="{{pet}}">
+    <image class="pet-avatar-mini" src="{{pet.avatar}}" mode="aspectFill"></image>
+    <view class="pet-info-mini">
+      <text class="pet-name-mini">{{pet.name}}</text>
+      <text class="pet-species-mini">{{pet.species}}</text>
+    </view>
+  </view>
+
+  <!-- 关键指标卡片 -->
+  <view class="stats-grid">
+    <!-- 当前体重 -->
+    <view class="stat-card current">
+      <view class="stat-icon">⚖️</view>
+      <view class="stat-value">{{currentWeight}}kg</view>
+      <view class="stat-label">当前体重</view>
+    </view>
+
+    <!-- 目标体重 -->
+    <view class="stat-card target" bindtap="showTargetWeightSheet">
+      <view class="stat-icon">🎯</view>
+      <view class="stat-value">{{targetWeight || '--'}}kg</view>
+      <view class="stat-label">目标体重</view>
+      <view class="stat-action">点击设置</view>
+    </view>
+
+    <!-- 体重变化 -->
+    <view class="stat-card change {{weightChange > 0 ? 'up' : weightChange < 0 ? 'down' : ''}}">
+      <view class="stat-icon">{{weightChange > 0 ? '📈' : weightChange < 0 ? '📉' : '➖'}}</view>
+      <view class="stat-value">{{weightChange > 0 ? '+' : ''}}{{weightChange}}kg</view>
+      <view class="stat-label">较上次</view>
+      <view class="stat-percent">{{weightChangePercent > 0 ? '+' : ''}}{{weightChangePercent}}%</view>
+    </view>
+  </view>
+
+  <!-- 体重折线图 -->
+  <view class="chart-card" wx:if="{{weights.length > 0}}">
+    <view class="card-title">
+      <text class="title-text">体重趋势</text>
+      <text class="title-count">共{{weights.length}}条记录</text>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="weightChart" class="chart-canvas"></canvas>
+      <!-- 简易折线图占位 -->
+      <view class="simple-chart">
+        <view class="chart-line"></view>
+        <block wx:for="{{chartData.series}}" wx:key="index">
+          <view class="chart-point" style="left: {{index / (chartData.series.length - 1) * 100}}%; bottom: {{(item - 0) / 10 * 100}}%"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体重记录列表 -->
+  <view class="records-section">
+    <view class="section-header">
+      <text class="section-title">历史记录</text>
+      <view class="add-btn-small" bindtap="showAddWeightSheet">
+        <text class="add-icon-small">+</text>
+        <text>添加</text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{weights.length === 0}}">
+      <text class="empty-icon">📊</text>
+      <text class="empty-text">还没有体重记录</text>
+      <text class="empty-hint">点击右上角添加第一条记录吧</text>
+    </view>
+
+    <view class="records-list" wx:else>
+      <block wx:for="{{weights}}" wx:key="_id">
+        <view class="record-item" bindlongpress="deleteWeight" data-id="{{item._id}}">
+          <view class="record-date">
+            <text class="date-day">{{item.date}}</text>
+            <text class="date-time">{{item.createTime}}</text>
+          </view>
+          <view class="record-content">
+            <view class="record-weight">
+              <text class="weight-value">{{item.weight}}</text>
+              <text class="weight-unit">kg</text>
+            </view>
+            <text class="record-note" wx:if="{{item.note}}">{{item.note}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!-- 添加体重弹窗 -->
+<view class="modal {{showAddSheet ? 'show' : ''}}" bindtap="closeAddSheet">
+  <view class="modal-content weight-modal" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">添加体重记录</text>
+      <text class="modal-close" bindtap="closeAddSheet">✕</text>
+    </view>
+
+    <view class="modal-body">
+      <view class="form-group">
+        <text class="label">体重 (kg)</text>
+        <input class="input large-input" type="digit" placeholder="请输入体重" value="{{newWeight.weight}}" bindinput="onWeightInput" />
+      </view>
+
+      <view class="form-group">
+        <text class="label">日期</text>
+        <picker mode="date" value="{{newWeight.date}}" bindchange="onDateChange">
+          <view class="picker">{{newWeight.date}}</view>
+        </picker>
+      </view>
+
+      <view class="form-group">
+        <text class="label">备注</text>
+        <textarea class="textarea" placeholder="记录一些变化..." value="{{newWeight.note}}" bindinput="onNoteInput" maxlength="100"></textarea>
+      </view>
+    </view>
+
+    <view class="modal-footer">
+      <button class="btn-primary" bindtap="saveWeight">保存记录</button>
+    </view>
+  </view>
+</view>
+
+<!-- 设置目标弹窗 -->
+<view class="modal {{showTargetSheet ? 'show' : ''}}" bindtap="closeTargetSheet">
+  <view class="modal-content target-modal" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">设置目标体重</text>
+      <text class="modal-close" bindtap="closeTargetSheet">✕</text>
+    </view>
+
+    <view class="modal-body">
+      <view class="target-tips">
+        <text class="tip-icon">💡</text>
+        <text class="tip-text">设置一个合理的目标体重，帮助{{pet.name}}保持健康</text>
+      </view>
+
+      <view class="form-group">
+        <text class="label">目标体重 (kg)</text>
+        <input class="input large-input" type="digit" placeholder="请输入目标体重" value="{{targetWeight}}" bindinput="onTargetInput" />
+      </view>
+
+      <view class="target-diff" wx:if="{{targetWeight > 0}}">
+        <text class="diff-label">与当前体重相差：</text>
+        <text class="diff-value {{targetDiffClass}}">
+          {{targetDiffSign}}{{targetDiffStr}}kg
+        </text>
+      </view>
+    </view>
+
+    <view class="modal-footer">
+      <button class="btn-primary" bindtap="saveTarget">保存目标</button>
+    </view>
+  </view>
+</view>

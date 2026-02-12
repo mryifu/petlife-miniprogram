@@ -1,0 +1,38 @@
+<!-- pages/pets/join.wxml -->
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">加入共养</text>
+    <text class="page-subtitle">输入邀请码加入宠物共养</text>
+  </view>
+
+  <view class="join-card">
+    <view class="input-section">
+      <text class="input-label">邀请码</text>
+      <input
+        class="code-input"
+        type="text"
+        maxlength="6"
+        placeholder="请输入6位邀请码"
+        value="{{code}}"
+        bindinput="onCodeInput"
+      />
+    </view>
+
+    <button class="btn-join" bindtap="joinPet" disabled="{{joining}}">
+      {{joining ? '加入中...' : '加入共养'}}
+    </button>
+
+    <view class="hint-box">
+      <text class="hint-icon">💡</text>
+      <text class="hint-text">邀请码有效期为24小时，请及时使用</text>
+    </view>
+  </view>
+
+  <view class="help-section">
+    <text class="help-title">如何获取邀请码？</text>
+    <text class="help-text">1. 让宠物创建者或共养人打开宠物详情</text>
+    <text class="help-text">2. 点击"成员"按钮</text>
+    <text class="help-text">3. 点击"邀请新成员"生成邀请码</text>
+    <text class="help-text">4. 将邀请码分享给您</text>
+  </view>
+</view>

@@ -1,0 +1,180 @@
+/**app.wxss**/
+page {
+  /* 奶茶色系配色 - 更丰富的色彩 */
+  --primary-color: #C59D5F; /* 焦糖色 */
+  --primary-light: #E6D5B8; /* 燕麦色 */
+  --primary-gradient: linear-gradient(135deg, #D4A574 0%, #C59D5F 100%);
+  --bg-color: #FFFBF0;     /* 奶油白背景 */
+  --bg-warm: #F7EFE5;      /* 暖灰色块 */
+  --white: #FFFFFF;
+
+  --text-main: #5C4033;    /* 深咖色文字 */
+  --text-secondary: #8D7B68; /* 浅咖色文字 */
+  --text-placeholder: #C0B2A0;
+
+  --border-color: #F0E6D2;
+  --danger: #FF8BA7;       /* 柔和红 */
+  --success: #95D1CC;      /* 豆沙绿 */
+  --warning: #FFB84D;      /* 温暖橙 */
+  --info: #A8D8EA;         /* 天空蓝 */
+
+  --radius-sm: 16rpx;
+  --radius-md: 24rpx;
+  --radius-lg: 32rpx;
+  --radius-xl: 40rpx;
+  --radius-round: 999rpx;
+
+  --card-shadow: 0 8rpx 32rpx rgba(197, 157, 95, 0.12);
+  --card-shadow-hover: 0 12rpx 40rpx rgba(197, 157, 95, 0.18);
+  --float-shadow: 0 16rpx 48rpx rgba(197, 157, 95, 0.25);
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  box-sizing: border-box;
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+
+/* Flex Utilities */
+.flex-row { display: flex; flex-direction: row; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.center { display: flex; align-items: center; justify-content: center; }
+
+/* Card Style - 更精致的卡片 */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:active::before {
+  opacity: 1;
+}
+
+/* 可爱的装饰元素 */
+.cute-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-round);
+  font-size: 24rpx;
+  font-weight: 600;
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.cute-tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: var(--radius-round);
+  font-size: 22rpx;
+  background: var(--bg-warm);
+  color: var(--text-secondary);
+  margin-right: 12rpx;
+}
+
+/* 渐变按钮 */
+.btn-gradient {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-round);
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(197, 157, 95, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 16rpx rgba(197, 157, 95, 0.3);
+}
+
+/* 可爱的分割线 */
+.cute-divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  margin: 32rpx 0;
+}
+
+/* 脉动动画 */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 可爱的空状态 */
+.empty-cute {
+  padding: 120rpx 0;
+  text-align: center;
+}
+
+.empty-cute .emoji {
+  font-size: 160rpx;
+  margin-bottom: 32rpx;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-cute .title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 16rpx;
+}
+
+.empty-cute .desc {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+

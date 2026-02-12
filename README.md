@@ -73,7 +73,7 @@ cloudfunctions/              # 云函数目录
 
 1. **克隆项目**
    ```bash
-   git clone https://github.com/your-username/petlife-miniprogram.git
+   git clone https://github.com/mryifu/petlife-miniprogram.git
    cd petlife-miniprogram
    ```
 
@@ -162,8 +162,8 @@ cloudfunctions/              # 云函数目录
 
 如有问题或建议，欢迎通过以下方式联系：
 
-- 提交 [Issue](https://github.com/your-username/petlife-miniprogram/issues)
-- 发送邮件至: your-email@example.com
+- 提交 [Issue](https://github.com/mryifu/petlife-miniprogram/issues)
+- 发送邮件至: mryifu@example.com
 
 ---
 
@@ -198,7 +198,7 @@ cloudfunctions/              # 云函数目录
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/petlife-miniprogram.git
+   git clone https://github.com/mryifu/petlife-miniprogram.git
    cd petlife-miniprogram
    ```
 

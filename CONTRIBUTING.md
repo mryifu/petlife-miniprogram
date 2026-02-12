@@ -12,7 +12,7 @@
 
 #### 报告 Bug
 
-如果你发现了 Bug，请通过 [GitHub Issues](https://github.com/your-username/petlife-miniprogram/issues) 提交，并包含以下信息：
+如果你发现了 Bug，请通过 [GitHub Issues](https://github.com/mryifu/petlife-miniprogram/issues) 提交，并包含以下信息：
 
 - Bug 的详细描述
 - 复现步骤
@@ -38,7 +38,7 @@
 2. **克隆你的 Fork**
 
    ```bash
-   git clone https://github.com/your-username/petlife-miniprogram.git
+   git clone https://github.com/mryifu/petlife-miniprogram.git
    cd petlife-miniprogram
    ```
 
@@ -110,7 +110,7 @@ Thank you for your interest in the PetLife project! We welcome contributions of 
 
 #### Report Bugs
 
-If you find a bug, please submit it via [GitHub Issues](https://github.com/your-username/petlife-miniprogram/issues) with:
+If you find a bug, please submit it via [GitHub Issues](https://github.com/mryifu/petlife-miniprogram/issues) with:
 
 - Detailed bug description
 - Steps to reproduce
@@ -136,7 +136,7 @@ If you have ideas for new features, feel free to propose them via Issues. Please
 2. **Clone your fork**
 
    ```bash
-   git clone https://github.com/your-username/petlife-miniprogram.git
+   git clone https://github.com/mryifu/petlife-miniprogram.git
    cd petlife-miniprogram
    ```
 
